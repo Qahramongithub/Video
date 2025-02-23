@@ -1,0 +1,296 @@
+{% load static %}
+{% load humanize %}
+<!DOCTYPE html>
+
+<html lang="uz" dir="ltr">
+<head>
+    <style>
+        /* Set the body background color to white */
+        body {
+            background-color: #ffffff;
+            color: black; /* Ensure text is black for readability */
+        }
+
+        .list-group-item h6 {
+            font-size: 14px;
+            font-weight: 500;
+            margin: 0;
+        }
+
+        .list-group-item h6 {
+            font-size: 12px;
+        }
+
+        .video-player iframe {
+            border-radius: 10px;
+        }
+
+        .video-info h1 {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .video-actions button {
+            padding: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+            background-color: #38ffae;
+            border: none;
+            color: #fff;
+            transition: background-color 0.3s;
+        }
+
+        .video-actions button:hover {
+            background-color: #2ec8a0;
+        }
+
+        .main {
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            height: 100vh; /* Full viewport height */
+        }
+
+        #content {
+            width: 100%; /* Allow the form to take full width of its container */
+            display: flex;
+            justify-content: center;
+        }
+
+        . * {
+            color: white;
+        }
+
+        #content-main {
+            width: 100%;
+            max-width: 500px; /* Set a max width to prevent the form from becoming too wide */
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #ffffff; /* White background for form area */
+        }
+
+        .form-row {
+            margin-bottom: 15px;
+        }
+
+        .form-row label {
+            font-weight: bold;
+        }
+
+        .form-row input,
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        .submit-row input {
+            padding: 10px 15px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .submit-row input:hover {
+            background-color: #0056b3;
+        }
+
+        .main {
+            display: flex;
+            justify-content: center; /* Markazga joylash */
+            align-items: center; /* Vertikal markazlash */
+            height: 100vh; /* To‘liq ekran balandligi */
+            padding: 20px; /* Tepa va pastdan masofa */
+        }
+
+        #content {
+            width: 100%;
+            max-width: 400px; /* Formaning maksimal kengligi */
+            padding: 30px; /* Ichki masofa */
+            margin: auto; /* O‘ng va chapdan markazlash */
+            background-color: #ffffff; /* White background */
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #content-main {
+            padding: 20px;
+        }
+
+        .form-group,
+        .form-row {
+            margin-bottom: 15px;
+        }
+
+        .submit-row {
+            text-align: center; /* Tugmani markazga joylash */
+        }
+
+        .submit-row input {
+            width: 100%; /* Tugmani to'liq uzunlikka chiqarish */
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .submit-row input:hover {
+            background-color: #0056b3;
+        }
+
+        .main {
+            display: flex;
+            justify-content: center; /* Markazga joylash */
+            align-items: flex-start; /* Kontentni yuqoriga chiqarish */
+            height: 100vh; /* To‘liq ekran balandligi */
+            padding-top: 5px; /* Yuqoridan bo‘sh joy qo‘shish */
+        }
+
+        #content {
+            margin-top: 1px; /* Yuqoriga yopishtirish */
+        }
+
+        .main {
+            display: flex;
+            justify-content: center; /* Markazga joylash */
+            align-items: center; /* Vertikal markazlash */
+            height: 10vh; /* To‘liq ekran balandligi */
+            padding: 10px; /* Tepa va pastdan masofa */
+        }
+
+        #content {
+            width: 100%;
+            max-width: 800px; /* Maksimal kenglik */
+            padding: 20px; /* Ichki masofa */
+            margin: 20px auto; /* Tashqi masofa (o‘ng va chapdan markazlash) */
+            background-color: #ffffff; /* White background */
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #content-main {
+            padding: 30px;
+        }
+
+        .form-row {
+            margin-bottom: 15px;
+        }
+
+        body {
+            background-color: white !important;
+        }
+
+        .container {
+            background-color: white !important;
+            color: black;
+        }
+
+        button {
+            background-color: white !important;
+            color: #ffffff !important;
+            border: 1px solid black;
+        }
+
+
+    </style>
+    <link rel="stylesheet" href="/static/admin/css/base.css">
+
+    <link rel="stylesheet" href="/static/admin/css/dark_mode.css">
+    <script src="/static/admin/js/theme.js" defer></script>
+
+    <link rel="stylesheet" href="/static/admin/css/nav_sidebar.css">
+    <script src="/static/admin/js/nav_sidebar.js" defer></script>
+
+    <link rel="stylesheet" href="/static/admin/css/changelists.css">
+
+    <script src="/static/admin/js/vendor/jquery/jquery.js"></script>
+    <script src="/static/admin/js/jquery.init.js"></script>
+    <script src="/static/admin/js/core.js"></script>
+    <script src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
+    <script src="/static/admin/js/actions.js"></script>
+    <script src="/static/admin/js/urlify.js"></script>
+    <script src="/static/admin/js/prepopulate.js"></script>
+    <script src="/static/admin/js/vendor/xregexp/xregexp.js"></script>
+    <script src="/static/admin/js/filters.js" defer></script>
+
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="/static/admin/css/responsive.css">
+    <meta name="robots" content="NONE,NOARCHIVE">
+</head>
+
+<body class=" app-apps model-finishproducthistory change-list"
+      data-admin-utc-offset="0">
+<a href="#content-start" class="skip-to-content-link">Skip to main content</a>
+<!-- Container -->
+<div id="container">
+
+    <div id="header">
+        <div id="branding">
+
+            <br>
+            <br>
+        </div>
+        <div id="user-tools">
+
+            <a href="/application-type" class="button button1">Video</a>
+            <a href="/employee-list" class="button button1">Xodim</a>
+            <a href="/category-list" class="button button1">Lavozim</a>
+            <button class="theme-toggle">
+                <div class="visually-hidden theme-label-when-auto">Toggle theme (current theme: auto)</div>
+                <div class="visually-hidden theme-label-when-light">Toggle theme (current theme: light)</div>
+                <div class="visually-hidden theme-label-when-dark">Toggle theme (current theme: dark)</div>
+                <svg aria-hidden="true" class="theme-icon-when-auto">
+                    <use xlink:href="#icon-sun"/>
+                </svg>
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- END Header -->
+
+    <nav aria-label="Breadcrumbs">
+
+        <div class="breadcrumbs">
+
+        </div>
+
+    </nav>
+
+    <div class="main" id="main">
+        <main id="content-start" class="content" tabindex="-1">
+            <!-- Content -->
+            <div id="content" class="colM">
+                <div id="content-main">
+                    <form action="#" method="post">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <label for="name" class="required">Lavozim</label>
+                            <input type="text" name="name" required id="name">
+                        </div>
+                        <div class="submit-row">
+                            <input type="submit" value="Saqlash">
+                        </div>
+                    </form>
+                </div>
+                <br class="clear">
+            </div>
+        </main>
+    </div>
+    <footer id="footer"></footer>
+</div>
+
+</body>
+</html>
