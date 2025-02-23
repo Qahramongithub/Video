@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="uz" dir="ltr">
+<html lang="uz" dir="ltr" data-theme="light">
 <head>
     <style>
         #nav-sidebar .module th {
@@ -132,8 +132,8 @@
     </style>
     <link rel="stylesheet" href="/static/admin/css/base.css">
 
-    <link rel="stylesheet" href="/static/admin/css/dark_mode.css">
-    <script src="/static/admin/js/theme.js" defer></script>
+{#    <link rel="stylesheet" href="/static/admin/css/dark_mode.css">#}
+{#    <script src="/static/admin/js/theme.js" defer></script>#}
 
 
     <link rel="stylesheet" href="/static/admin/css/nav_sidebar.css">
@@ -190,15 +190,6 @@
                 {% csrf_token %}
                 <button type="submit">Log out</button>
             </form>
-            <button class="theme-toggle">
-                <div class="visually-hidden theme-label-when-auto">Toggle theme (current theme: auto)</div>
-                <div class="visually-hidden theme-label-when-light">Toggle theme (current theme: light)</div>
-                <div class="visually-hidden theme-label-when-dark">Toggle theme (current theme: dark)</div>
-                <svg aria-hidden="true" class="theme-icon-when-auto">
-                    <use xlink:href="#icon-sun"/>
-                </svg>
-
-            </button>
 
         </div>
 

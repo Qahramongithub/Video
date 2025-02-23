@@ -21,12 +21,10 @@ class ApplicationListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        max_id = ApplicationType.objects.aggregate(min_pk=Min('pk'))['min_pk']  # Faqat sonni olamiz
+        min_id = ApplicationType.objects.aggregate(min_pk=Min('pk'))['min_pk']
 
-        if max_id:  # Agar max_id mavjud bo'lsa
-            context['videos'] = Application.objects.filter(ApplicationType_id=max_id)  # Faqat id qiymatini beramiz
-        else:
-            context['videos'] = Application.objects.none()  # Bo'sh queryset qaytarish
+        context['videos'] = Application.objects.filter(
+            ApplicationType__pk=min_id) if min_id else Application.objects.none()
 
         return context
 

@@ -2,11 +2,8 @@
 .idea/
 .idea
 __pycache__/
-media/videos/
 
-git init
-git add .
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/Qahramongithub/video.git
-git push -u origin main
+git add media/videos/.gitkeep
+git commit -m "Add media/videos directory without videos"
+
+

@@ -1,16 +1,63 @@
 <!DOCTYPE html>
 
-<html lang="en-us" dir="ltr">
+<html lang="en-us" dir="ltr" data-theme="light">
+
 <head>
     <style>
+        /* Mobil qurilmalar uchun asosiy o‘zgarishlar */
+        @media screen and (max-width: 768px) {
+            body {
+                font-size: 16px;
+                padding: 10px;
+            }
+
+           
+
+            .form-row {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .form-row label {
+                font-size: 14px;
+            }
+
+            input, textarea, select {
+                width: 100%;
+                padding: 8px;
+                font-size: 14px;
+            }
+
+            .submit-row {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .button {
+                width: 100%;
+                padding: 10px;
+                font-size: 16px;
+            }
+
+            #user-tools {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .theme-toggle {
+                width: 50px;
+                height: 50px;
+            }
+        }
+
         body {
             background-color: white !important;
         }
-
-        .container {
-            background-color: white !important;
-            color: black;
-        }
+        
 
         button {
             background-color: white !important;
@@ -21,8 +68,8 @@
     <title>Add application | Django site admin</title>
     <link rel="stylesheet" href="/static/admin/css/base.css">
 
-    <link rel="stylesheet" href="/static/admin/css/dark_mode.css">
-    <script src="/static/admin/js/theme.js"></script>
+{#    <link rel="stylesheet" href="/static/admin/css/dark_mode.css">#}
+{#    <script src="/static/admin/js/theme.js"></script>#}
 
 
     <link rel="stylesheet" href="/static/admin/css/nav_sidebar.css">
@@ -71,15 +118,15 @@
             <a href="/application-type" class="button button1">Video</a>
             <a href="/employee-list" class="button button1">Xodim</a>
             <a href="/category-list" class="button button1">Lavozim</a>
-            <button class="theme-toggle">
-                <div class="visually-hidden theme-label-when-auto">Toggle theme (current theme: auto)</div>
-                <div class="visually-hidden theme-label-when-light">Toggle theme (current theme: light)</div>
-                <div class="visually-hidden theme-label-when-dark">Toggle theme (current theme: dark)</div>
-                <svg aria-hidden="true" class="theme-icon-when-auto">
-                    <use xlink:href="#icon-sun"/>
-                </svg>
-
-            </button>
+{#            <button class="theme-toggle">#}
+{#                <div class="visually-hidden theme-label-when-auto">Toggle theme (current theme: auto)</div>#}
+{#                <div class="visually-hidden theme-label-when-light">Toggle theme (current theme: light)</div>#}
+{#                <div class="visually-hidden theme-label-when-dark">Toggle theme (current theme: dark)</div>#}
+{#                <svg aria-hidden="true" class="theme-icon-when-auto">#}
+{#                    <use xlink:href="#icon-sun"/>#}
+{#                </svg>#}
+{##}
+{#            </button>#}
 
         </div>
 
@@ -279,4 +326,4 @@
 <!-- END Container -->
 
 </body>
-</html>
+</>
