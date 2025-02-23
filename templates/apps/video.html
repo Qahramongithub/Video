@@ -1,10 +1,173 @@
+{% load static %}
+{% load humanize %}
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
 
-</body>
-</html>
+<html lang="uz" dir="ltr">
+<head>
+    <style>
+
+
+        /* Icon style */
+        .list-group-item i {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        
+        .list-group-item h6 {
+            font-size: 14px;
+            font-weight: 500;
+            margin: 0;
+        }
+        
+
+            .list-group-item h6 {
+                font-size: 12px;
+            }
+        }
+
+        .video-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #fff;
+            padding: 20px;
+        }
+
+        .video-player iframe {
+            border-radius: 10px;
+        }
+
+        .video-info h1 {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .video-actions button {
+            padding: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+            background-color: #38ffae;
+            border: none;
+            color: #fff;
+            transition: background-color 0.3s;
+        }
+
+        .video-actions button:hover {
+            background-color: #2ec8a0;
+        }
+
+        .video-page {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .video-player {
+            flex: 2;
+            margin-right: 20px;
+        }
+
+    </style>
+    <link rel="stylesheet" href="/static/admin/css/base.css">
+
+    <link rel="stylesheet" href="/static/admin/css/dark_mode.css">
+    <script src="/static/admin/js/theme.js" defer></script>
+
+
+    <link rel="stylesheet" href="/static/admin/css/nav_sidebar.css">
+    <script src="/static/admin/js/nav_sidebar.js" defer></script>
+
+
+    <link rel="stylesheet" href="/static/admin/css/changelists.css">
+
+
+    <script src="/static/admin/js/vendor/jquery/jquery.js"></script>
+    <script src="/static/admin/js/jquery.init.js"></script>
+    <script src="/static/admin/js/core.js"></script>
+    <script src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
+    <script src="/static/admin/js/actions.js"></script>
+    <script src="/static/admin/js/urlify.js"></script>
+    <script src="/static/admin/js/prepopulate.js"></script>
+    <script src="/static/admin/js/vendor/xregexp/xregexp.js"></script>
+    <script src="/static/admin/js/filters.js" defer></script>
+
+
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="/static/admin/css/responsive.css">
+    <meta name="robots" content="NONE,NOARCHIVE">
+</head>
+
+<body class=" app-apps model-finishproducthistory change-list"
+      data-admin-utc-offset="0">
+<a href="#content-start" class="skip-to-content-link">Skip to main content</a>
+<!-- Container -->
+<div id="container">
+
+
+    <!-- Header -->
+
+    <div id="header">
+        <div id="branding">
+            <h1 id="site-name"><a href="/admin/">Qahramon</a></h1>
+        </div>
+        <div id="user-tools">
+            <a href="/admin/apps/application/add/" class="button button1">Video</a>
+            <a href="/product_create" class="button button1">1 - Sklad</a>
+            <a href="/finish_product_create" class="button button1">2 - Sklad</a>
+            <a href="#" class="button button1">Maxsulotlar jadvali</a>
+        </div>
+
+
+    </div>
+
+    <!-- END Header -->
+
+    <nav aria-label="Breadcrumbs">
+
+        <div class="breadcrumbs">
+
+        </div>
+    </nav>
+    <div class="main" id="main">
+
+
+        <div id="content-start" class="content" tabindex="-1">
+
+
+            <div id="content-main">
+
+                <ul class="object-tools">
+
+
+                </ul>
+                <div class="row">
+
+                    <div class="col-md-10" style="margin-left: 5%;">
+                        <div class="bg-light w-75 m-auto mt-5">
+                            {% for video in videos %}
+                                <div class="video-page">
+                                    <div class="video-player">
+                                        <video width="800" height="450" controls>
+                                            <source src="http://127.0.0.1:8000/media/videos/2024-06-22_19-44-24.mp4"
+                                                    type="video/mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    </div>
+                                </div>
+
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div id="content" class>
+                    <div style="display: flex; justify-content: center; gap: 10px;">
+                    </div>
+                </div>
+            </div>
+
+            <br class="clear">
+        </div>
+        <!-- END Content -->
+        <div id="footer"></div>
+    </div>
+</div>

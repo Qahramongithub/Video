@@ -1,10 +1,16 @@
-{% load static %}
-{% load humanize %}
 <!DOCTYPE html>
 
 <html lang="uz" dir="ltr">
 <head>
     <style>
+        .video-player video {
+            border: none; /* Iframe chegarasini olib tashlaydi */
+            width: 100%; /* Videoni moslashtiradi */
+            max-width: 800px; /* Maksimal kenglikni belgilaydi */
+            height: auto; /* Aspect ratio saqlanadi */
+        }
+
+
         /* Style for the button container */
         .list-group {
             display: flex;
@@ -42,21 +48,18 @@
             font-size: 20px;
         }
 
-        /* Active button style */
         .list-group-item.active {
             background-color: #2c516d;
             color: white;
             box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
         }
 
-        /* Title style */
         .list-group-item h6 {
             font-size: 14px;
             font-weight: 500;
             margin: 0;
         }
 
-        /* Additional responsive styling for better design on small screens */
         @media (max-width: 768px) {
             .list-group-item {
                 padding: 12px;
@@ -65,14 +68,6 @@
             .list-group-item h6 {
                 font-size: 12px;
             }
-        }
-
-        .video-page {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #fff;
-            padding: 20px;
         }
 
         .video-player iframe {
@@ -99,16 +94,159 @@
             background-color: #2ec8a0;
         }
 
-        .video-page {
-            display: flex;
-            justify-content: space-between;
+        /* CHANGELISTS */
+        #changelist table {
+            width: 100%;
         }
 
-        .video-player {
-            flex: 2;
-            margin-right: 20px;
+        .change-list .filtered table {
+            border-right: none;
         }
 
+        .change-list .filtered table tbody th {
+            padding-right: 1em;
+        }
+
+        /* CHANGELIST TABLES */
+        #changelist table thead th {
+            padding: 0;
+            white-space: nowrap;
+            vertical-align: middle;
+        }
+
+        #changelist table tfoot {
+            color: var(--body-quiet-color);
+        }
+
+        #toolbar form input {
+            border-radius: 4px;
+            font-size: 0.875rem;
+            padding: 5px;
+            color: var(--body-fg);
+        }
+
+        #toolbar form input[type="submit"] {
+            border: 1px solid var(--border-color);
+            font-size: 0.8125rem;
+            padding: 4px 8px;
+            margin: 0;
+            vertical-align: middle;
+            background: var(--body-bg);
+            box-shadow: 0 -15px 20px -10px rgba(0, 0, 0, 0.15) inset;
+            cursor: pointer;
+            color: var(--body-fg);
+        }
+
+        #toolbar form input[type="submit"]:focus,
+        #toolbar form input[type="submit"]:hover {
+            border-color: var(--body-quiet-color);
+        }
+
+        #changelist-search img {
+            vertical-align: middle;
+            margin-right: 4px;
+        }
+
+        #changelist-filter h2 {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 5px 15px;
+            margin-bottom: 12px;
+            border-bottom: none;
+        }
+
+        #changelist-filter h3,
+        #changelist-filter details summary {
+            font-weight: 400;
+            padding: 0 15px;
+            margin-bottom: 10px;
+        }
+
+        #changelist-filter details summary > * {
+            display: inline;
+        }
+
+        #changelist-filter details > summary {
+            list-style-type: none;
+        }
+
+        #changelist-filter details > summary::-webkit-details-marker {
+            display: none;
+        }
+
+        #changelist-filter details > summary::before {
+            content: '→';
+            font-weight: bold;
+            color: var(--link-hover-color);
+        }
+
+        #changelist-filter details[open] > summary::before {
+            content: '↓';
+        }
+
+        #changelist-filter ul {
+            margin: 5px 0;
+            padding: 0 15px 15px;
+            border-bottom: 1px solid var(--hairline-color);
+        }
+
+        #changelist-filter ul:last-child {
+            border-bottom: none;
+        }
+
+        #changelist-filter li {
+            list-style-type: none;
+            margin-left: 0;
+            padding-left: 0;
+        }
+
+        #changelist-filter a {
+            display: block;
+            color: var(--body-quiet-color);
+            word-break: break-word;
+        }
+
+        #changelist-filter li.selected a {
+            color: var(--link-selected-fg);
+        }
+
+        #changelist-filter a:focus, #changelist-filter a:hover,
+        #changelist-filter li.selected a:focus,
+        #changelist-filter li.selected a:hover {
+            color: var(--link-hover-color);
+        }
+
+        .change-list .toplinks a {
+            font-size: 0.8125rem;
+        }
+
+        #changelist table input {
+            margin: 0;
+            vertical-align: baseline;
+        }
+
+        #changelist .actions select {
+            vertical-align: top;
+            height: 1.5rem;
+            color: var(--body-fg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 0.875rem;
+            padding: 0 0 0 4px;
+            margin: 0;
+            margin-left: 10px;
+        }
+
+        #changelist .actions select:focus {
+            border-color: var(--body-quiet-color);
+        }
+
+        #changelist .actions label {
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 0.8125rem;
+        }
     </style>
     <link rel="stylesheet" href="/static/admin/css/base.css">
 
@@ -120,7 +258,7 @@
     <script src="/static/admin/js/nav_sidebar.js" defer></script>
 
 
-    <link rel="stylesheet" href="/static/admin/css/changelists.css">
+    {#    <link rel="stylesheet" href="/static/admin/css/changelists.css">#}
 
 
     <script src="/static/admin/js/vendor/jquery/jquery.js"></script>
@@ -162,15 +300,10 @@
         <div id="user-tools">
 
 
-            <a href="/admin/apps/application/add/" class="button button1">Video</a>
-            <a href="/product_create" class="button button1">1 - Sklad</a>
-            <a href="/finish_product_create" class="button button1">2 - Sklad</a>
-            <a href="#" class="button button1">Maxsulotlar jadvali</a>
-
+            <a href="/employee-list" class="button button1">Xodimlar</a>
+            <a href="/application-type" class="button button1">Video</a>
 
         </div>
-
-
     </div>
 
     <!-- END Header -->
@@ -196,6 +329,7 @@
 
 
                 </ul>
+
                 <div class="row">
                     <div class="col-md-2 h-70 text-center"
                          style="background-color: #ffffff; padding-right: 0; position: absolute;">
@@ -218,7 +352,9 @@
                     <div style="display: flex; justify-content: center; gap: 10px;">
                     </div>
                 </div>
+
             </div>
+
 
             <br class="clear">
         </div>
@@ -226,4 +362,4 @@
         <div id="footer"></div>
     </div>
 </div>
-<!-- END Container -->
+

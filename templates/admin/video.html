@@ -1,10 +1,95 @@
+{% extends 'base.html' %}
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% block video %}
+    <html lang="uz">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #ffffff;
+            color: #151515;
+        }
 
-</body>
-</html>
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2px 5px;
+            background: #202020;
+        }
+
+        .video-grid {
+            display: flex;
+            justify-content: flex-start; /* Videolarni boshlang'ich joyga surish */
+            flex-wrap: wrap; /* Videolarni qatorlarga joylashtirish */
+            gap: 20px; /* Videolar orasidagi bo'shliqni kengaytirish */
+            padding: 20px; /* Video grid atrofida ichki bo'shliq */
+        }
+
+        .video-card {
+            background: #ffffff;
+            padding: 10px;
+            border-radius: 6px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            flex: 0 0 300px; /* Har bir video uchun minimal kenglik */
+            margin-left: 300px; /* Har bir video cardning chap tomoni bilan bo'shliq */
+            margin-right: 10px; /* Har bir video cardning o'ng tomoni bilan bo'shliq */
+        }
+
+        .video-card img {
+            width: 100%;
+            border-radius: 6px;
+        }
+
+        .video-card h3 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .video-card a {
+            text-align: center;
+            display: block;
+            color: #1a73e8;
+            text-decoration: none;
+        }
+
+        .video-card a:hover {
+            text-decoration: underline;
+        }
+
+        .video-card button {
+            display: block;
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .video-card button:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <body>
+    <main>
+        <div class="video-grid">
+            {% for video in videos %}
+                <div class="video-card">
+                    <video width="300" height="200" controls preload="metadata">
+                        <source src="{{ video.stream_url }}" type="video/mp4">
+                        Brauzeringiz ushbu videoni qo‘llab-quvvatlamaydi.
+                    </video>
+                    <a href="{% url 'video_stream' video.id %}">Yuborish</a>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+    </body>
+    </html>
+{% endblock %}
+

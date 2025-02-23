@@ -1,10 +1,257 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="en-us" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Add application | Django site admin</title>
+    <link rel="stylesheet" href="/static/admin/css/base.css">
+
+    <link rel="stylesheet" href="/static/admin/css/dark_mode.css">
+    <script src="/static/admin/js/theme.js"></script>
+
+
+    <link rel="stylesheet" href="/static/admin/css/nav_sidebar.css">
+    <script src="/static/admin/js/nav_sidebar.js" defer></script>
+
+    <link rel="stylesheet" href="/static/admin/css/forms.css">
+
+
+    <script src="/admin/jsi18n/"></script>
+    <script src="/static/admin/js/vendor/jquery/jquery.js"></script>
+    <script src="/static/admin/js/jquery.init.js"></script>
+    <script src="/static/admin/js/core.js"></script>
+    <script src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
+    <script src="/static/admin/js/actions.js"></script>
+    <script src="/static/admin/js/urlify.js"></script>
+    <script src="/static/admin/js/prepopulate.js"></script>
+    <script src="/static/admin/js/vendor/xregexp/xregexp.js"></script>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/admin/css/responsive.css">
+
+
+    <meta name="robots" content="NONE,NOARCHIVE">
 </head>
-<body>
+
+<body class=" app-apps model-application change-form"
+      data-admin-utc-offset="0">
+<a href="#content-start" class="skip-to-content-link">Skip to main content</a>
+<!-- Container -->
+<div id="container">
+
+
+    <!-- Header -->
+
+    <header id="header">
+        <div id="branding">
+            <div>
+                <br>
+                <br>
+            </div>
+
+        </div>
+
+        <div id="user-tools">
+
+            <form id="logout-form" method="post" action="/admin/logout/">
+                <input type="hidden" name="csrfmiddlewaretoken"
+                       value="rrCJW9dmGvvXUN9ob2YxX1wxHTc5TlmVHfLOmXD4q51TSidkoJgK9P50ajn7BQ2D">
+                <button type="submit">Log out</button>
+            </form>
+
+        </div>
+
+
+    </header>
+
+    <!-- END Header -->
+
+    <nav aria-label="Breadcrumbs">
+
+        <div class="breadcrumbs">
+
+        </div>
+
+    </nav>
+
+
+    <div class="main" id="main">
+
+
+        <button class="sticky toggle-nav-sidebar" id="toggle-nav-sidebar" aria-label="Toggle navigation"></button>
+        <main id="content-start" class="content" tabindex="-1">
+
+
+            <!-- Content -->
+            <div id="content" class="colM">
+
+                <h1>Add application</h1>
+
+                <div id="content-main">
+
+
+                    <form enctype="multipart/form-data" method="post" id="application_form" novalidate><input
+                            type="hidden" name="csrfmiddlewaretoken"
+                            value="rrCJW9dmGvvXUN9ob2YxX1wxHTc5TlmVHfLOmXD4q51TSidkoJgK9P50ajn7BQ2D">
+                        <div>
+
+
+                            <fieldset class="module aligned ">
+
+
+                                <div class="form-row field-video">
+
+
+                                    <div>
+
+                                        <div class="flex-container">
+
+                                            <label class="required" for="id_video">Video:</label>
+
+                                            <input type="file" name="video" required id="id_video">
+
+
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+
+                                <div class="form-row field-description">
+
+
+                                    <div>
+
+                                        <div class="flex-container">
+
+                                            <label class="required" for="id_description">Description:</label>
+
+                                            <textarea name="description" cols="40" rows="10" class="vLargeTextField"
+                                                      required id="id_description">
+</textarea>
+
+
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+
+                                <div class="form-row field-number">
+
+
+                                    <div>
+
+                                        <div class="flex-container">
+
+                                            <label class="required" for="id_number">Number:</label>
+
+                                            <input type="number" name="number" class="vIntegerField" required
+                                                   id="id_number">
+
+
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+
+                                <div class="form-row field-ApplicationType">
+
+
+                                    <div>
+
+                                        <div class="flex-container">
+
+                                            <label class="required" for="id_ApplicationType">ApplicationType:</label>
+
+                                            <div class="related-widget-wrapper" data-model-ref="applicationtype">
+                                                <select name="ApplicationType" data-context="available-source" required
+                                                        id="id_ApplicationType">
+                                                    <option value="" selected>---------</option>
+
+                                                    <option value="1">Call senter</option>
+
+                                                    <option value="2">Qahramon Begboyev Begboyev</option>
+
+                                                </select>
+
+                                                <a class="related-widget-wrapper-link change-related"
+                                                   id="change_id_ApplicationType"
+                                                   data-href-template="/admin/apps/applicationtype/__fk__/change/?_to_field=id&amp;_popup=1"
+                                                   data-popup="yes"
+                                                   title="Change selected application type"><img
+                                                        src="/static/admin/img/icon-changelink.svg" alt="" width="20"
+                                                        height="20"></a><a
+                                                    class="related-widget-wrapper-link add-related"
+                                                    id="add_id_ApplicationType"
+                                                    data-popup="yes"
+                                                    href="/admin/apps/applicationtype/add/?_to_field=id&amp;_popup=1"
+                                                    title="Add another application type"><img
+                                                    src="/static/admin/img/icon-addlink.svg" alt="" width="20"
+                                                    height="20"></a><a class="related-widget-wrapper-link view-related"
+                                                                       id="view_id_ApplicationType"
+                                                                       data-href-template="/admin/apps/applicationtype/__fk__/change/?_to_field=id"
+                                                                       title="View selected application type"><img
+                                                    src="/static/admin/img/icon-viewlink.svg" alt="" width="20"
+                                                    height="20"></a>
+
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+
+
+                            </fieldset>
+
+
+                            <div class="submit-row">
+
+                                <input type="submit" value="Save" class="default" name="_save">
+
+                                <input type="submit" value="Save and add another" name="_addanother">
+                                <input type="submit" value="Save and continue editing" name="_continue">
+
+
+                            </div>
+
+
+                            <script id="django-admin-form-add-constants"
+                                    src="/static/admin/js/change_form.js"
+
+                                    data-model-name="application"
+
+                                    async>
+                            </script>
+
+
+                            <script id="django-admin-prepopulated-fields-constants"
+                                    src="/static/admin/js/prepopulate_init.js"
+                                    data-prepopulated-fields="[]">
+                            </script>
+
+
+                        </div>
+                    </form>
+                </div>
+
+
+                <br class="clear">
+            </div>
+            <!-- END Content -->
+        </main>
+    </div>
+    <footer id="footer"></footer>
+</div>
+<!-- END Container -->
 
 </body>
 </html>
