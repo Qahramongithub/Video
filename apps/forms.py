@@ -1,6 +1,6 @@
 from django import forms
 
-from apps.models import Application
+from apps.models import Application, ApplicationType
 
 
 class AdminLoginForm(forms.Form):
@@ -23,4 +23,10 @@ class EmployeeForm(forms.Form):
 class VideoModelForm(forms.ModelForm):
     class Meta:
         model = Application
+        fields = '__all__'
+
+
+class ApplicationTypeForm(forms.ModelForm):
+    class Meta:
+        model = ApplicationType
         fields = '__all__'

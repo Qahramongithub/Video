@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
-<!DOCTYPE html>
+
 {% block video %}
-    <html lang="uz">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,20 +10,61 @@
             color: #151515;
         }
 
-        header {
+        .btn {
+            background: #ffffff;
+            color: white;
+
+        }
+
+        button {
+            background-color: #3e7691 !important;
+            color: #ffffff !important;
+            border: 1px solid black;
+        }
+
+        body {
+            background-color: white !important;
+        }
+
+        .container {
+            background-color: white !important;
+            color: black;
+        }
+
+        button {
+            padding: 8px 16px;
+            font-size: 14px;
+            background-color: #3095cc;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 2px 5px;
-            background: #202020;
+            height: 100vh;
+        }
+
+        .left-panel {
+            width: 20%;
+            background-color: #f4f4f4;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .right-panel {
+            width: 60%;
+            padding: 20px;
+            background-color: #fff;
         }
 
         .video-grid {
-            display: flex;
-            justify-content: flex-start; /* Videolarni boshlang'ich joyga surish */
-            flex-wrap: wrap; /* Videolarni qatorlarga joylashtirish */
-            gap: 20px; /* Videolar orasidagi bo'shliqni kengaytirish */
-            padding: 20px; /* Video grid atrofida ichki bo'shliq */
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding: 20px;
         }
 
         .video-card {
@@ -32,64 +72,96 @@
             padding: 10px;
             border-radius: 6px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            flex: 0 0 300px; /* Har bir video uchun minimal kenglik */
-            margin-left: 300px; /* Har bir video cardning chap tomoni bilan bo'shliq */
-            margin-right: 10px; /* Har bir video cardning o'ng tomoni bilan bo'shliq */
+            width: 300px;
+            text-align: center;
         }
 
-        .video-card img {
+        .video-card video {
             width: 100%;
             border-radius: 6px;
         }
 
-        .video-card h3 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .video-card a {
-            text-align: center;
-            display: block;
-            color: #1a73e8;
-            text-decoration: none;
-        }
-
-        .video-card a:hover {
-            text-decoration: underline;
-        }
-
-        .video-card button {
-            display: block;
-            width: 100%;
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px;
+        .action-buttons {
+            color: #4ac1f7;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-top: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
         }
 
-        .video-card button:hover {
-            background-color: #45a049;
+        .send-button {
+            text-decoration: none;
+            background-color: #ffffff;
+            color: #216793;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .send-button:hover {
+            background-color: #1b869e;
         }
     </style>
-    <body>
+
     <main>
-        <div class="video-grid">
-            {% for video in videos %}
-                <div class="video-card">
-                    <video width="300" height="200" controls preload="metadata">
-                        <source src="{{ video.stream_url }}" type="video/mp4">
-                        Brauzeringiz ushbu videoni qo‘llab-quvvatlamaydi.
-                    </video>
-                    <a href="{% url 'video_stream' video.id %}">Yuborish</a>
+        <div class="container">
+            <div class="left-panel">
+                <div class="list-group">
+                    {% for application in applications %}
+                        <a href="{% url 'application-filter' %}?pk={{ application.id }}"
+                           class="btn btn-primary list-group-item text-dark mt-1">
+                            <h6>{{ application.name }}</h6>
+                        </a>
+                    {% endfor %}
                 </div>
-            {% endfor %}
+            </div>
+            <div class="right-panel">
+                <div class="video-grid">
+                    {% for video in videos %}
+                        <div class="video-card" id="video-{{ video.id }}">
+                            <video controls height="200">
+                                <source src="{{ video.stream_url }}" type="video/mp4">
+                                Brauzeringiz ushbu videoni qo‘llab-quvvatlamaydi.
+                            </video>
+                            <div class="action-buttons">
+                                <a href="{% url 'video_stream' video.id %}"
+                                   class="send-button">{{ video.number }}-video</a>
+                                <button class="delete-video" data-id="{{ video.id }}">O'chirish</button>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </main>
-    </body>
-    </html>
-{% endblock %}
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll(".delete-video").forEach(button => {
+                button.addEventListener("click", function () {
+                    let videoId = this.dataset.id;
+                    let videoElement = document.getElementById("video-" + videoId);
+                    if (confirm("Ushbu videoni o'chirishni xohlaysizmi?")) {
+                        fetch(`/delete-video/${videoId}/`, {
+                            method: "POST",
+                            headers: {
+                                "X-CSRFToken": "{{ csrf_token }}",
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(response => {
+                                if (response.ok) {
+                                    videoElement.remove();
+                                    alert("Video o'chirildi!");
+                                } else {
+                                    alert("Xatolik yuz berdi!");
+                                }
+                            });
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

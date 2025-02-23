@@ -2,11 +2,13 @@ import os
 
 from django.conf import settings
 from django.db.models import Min
-from django.http import StreamingHttpResponse, HttpResponse
+from django.http import StreamingHttpResponse, HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404
-from django.views.generic import ListView, CreateView, FormView
+from django.urls import reverse_lazy
+from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import ListView, CreateView, FormView, View
 
-from apps.forms import VideoModelForm
+from apps.forms import VideoModelForm, ApplicationTypeForm
 from apps.models import ApplicationType, Application
 from root import settings
 
@@ -70,13 +72,45 @@ def stream_video(request, video_id):
     return response
 
 
-class VideoCreateView(FormView):
-    queryset = Application.objects.all()
+class VideoCreateView(FormView, ListView):
     form_class = VideoModelForm
+    queryset = ApplicationType.objects.all()
     template_name = 'admin/video-create.html'
+    success_url = reverse_lazy('application-list')
+    context_object_name = 'applications'
 
     def form_valid(self, form):
-        print(self)
+        form.save()
+        return super().form_valid(form)
 
     def form_invalid(self, form):
-        print(self)
+        return super().form_invalid(form)
+
+
+class CategoryCreate(FormView):
+    form_class = ApplicationTypeForm
+    template_name = 'admin/category-create.html'
+    success_url = reverse_lazy('category-list')
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        return super().form_invalid(form)
+
+
+class CategoryListView(ListView):
+    queryset = ApplicationType.objects.all()
+    template_name = 'admin/category-list.html'
+    context_object_name = 'applications'
+
+
+@csrf_exempt  # CSRF tokenni tekshirishga hojat yo'q (JS-da ishlatayotgan bo‘lsangiz)
+def delete_video(request, video_id):
+    if request.method == "POST":
+        video = get_object_or_404(Application, id=video_id)
+        video.delete()
+        return JsonResponse({"message": "Video muvaffaqiyatli o‘chirildi!"})
+
+    return JsonResponse({"error": "Faqat POST so‘rov qabul qilinadi!"}, status=400)

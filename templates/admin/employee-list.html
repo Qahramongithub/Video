@@ -110,7 +110,7 @@
         .sell-button {
             padding: 8px 16px;
             font-size: 14px;
-            background-color: #28a745;
+            background-color: #3095cc;
             color: #fff;
             border: none;
             border-radius: 4px;
@@ -173,20 +173,32 @@
     <div id="header">
         <div id="branding">
 
-            <h1 id="site-name"><a href="/admin/">Qahramon</a></h1>
-
+            <br>
+            <br>
 
         </div>
 
 
         <div id="user-tools">
 
+            <a href="/application-type" class="button button1">video</a>
+            <a href="/category-list" class="button button1">Lavozim</a>
+            <a href="/employee-create" class="button button1">Xodim qo'shish</a>
+            <form id="logout-form" method="post" action="/">
+                <input type="hidden" name="csrfmiddlewaretoken"
+                >
+                {% csrf_token %}
+                <button type="submit">Log out</button>
+            </form>
+            <button class="theme-toggle">
+                <div class="visually-hidden theme-label-when-auto">Toggle theme (current theme: auto)</div>
+                <div class="visually-hidden theme-label-when-light">Toggle theme (current theme: light)</div>
+                <div class="visually-hidden theme-label-when-dark">Toggle theme (current theme: dark)</div>
+                <svg aria-hidden="true" class="theme-icon-when-auto">
+                    <use xlink:href="#icon-sun"/>
+                </svg>
 
-            <a href="/admin/" class="button button1">Admin</a>
-            <a href="/product_create" class="button button1">1 - Sklad</a>
-            <a href="/finish_product_create" class="button button1">2 - Sklad</a>
-            <a href="#" class="button button1">Maxsulotlar jadvali</a>
-
+            </button>
 
         </div>
 
@@ -232,17 +244,17 @@
                                 </thead>
                                 <tbody>
                                 {% for employee in employees %}
-                                    <tr>
-                                        <td>{{ forloop.counter }}</td>
-                                        <td>{{ employee.fullname }}</td>
-                                        <td>{{ employee.ApplicationType.name }}</td>
-                                        <td>
-                                            <button class="delete-button sell-button"
-                                                    data-product-id="{{ employee.pk }}">Chiqib
-                                                ketdi
-                                            </button>
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ employee.fullname }}</td>
+                                    <td>{{ employee.ApplicationType.name }}</td>
+                                    <td>
+                                        <button class="delete-button sell-button button1"
+                                                data-product-id="{{ employee.pk }}">Chiqib
+                                            ketdi
+                                        </button>
+                                    </td>
+                                </tr>
                                 {% endfor %}
                                 </tbody>
                             </table>
@@ -295,4 +307,22 @@
             });
         });
     });
+
+    $('.btn_open_modal').on('click', function () {
+        let product_id = $(this).attr('name');
+        $('#hidden_stream_id').val(product_id);
+    });
+
+
+    $(".card-body .copy_ref_bn").on('click', function () {
+        var copyText = $(this).parent().find('.ref_link').get(0);
+
+        copyText.select();
+        document.execCommand("copy");
+        $(this).text('Nusxa olindi');
+    });
+
+
 </script>
+
+

@@ -2,6 +2,22 @@
 
 <html lang="en-us" dir="ltr">
 <head>
+    <style>
+        body {
+            background-color: white !important;
+        }
+
+        .container {
+            background-color: white !important;
+            color: black;
+        }
+
+        button {
+            background-color: white !important;
+            color: #ffffff !important;
+            border: 1px solid black;
+        }
+    </style>
     <title>Add application | Django site admin</title>
     <link rel="stylesheet" href="/static/admin/css/base.css">
 
@@ -52,12 +68,18 @@
         </div>
 
         <div id="user-tools">
+            <a href="/application-type" class="button button1">Video</a>
+            <a href="/employee-list" class="button button1">Xodim</a>
+            <a href="/category-list" class="button button1">Lavozim</a>
+            <button class="theme-toggle">
+                <div class="visually-hidden theme-label-when-auto">Toggle theme (current theme: auto)</div>
+                <div class="visually-hidden theme-label-when-light">Toggle theme (current theme: light)</div>
+                <div class="visually-hidden theme-label-when-dark">Toggle theme (current theme: dark)</div>
+                <svg aria-hidden="true" class="theme-icon-when-auto">
+                    <use xlink:href="#icon-sun"/>
+                </svg>
 
-            <form id="logout-form" method="post" action="/admin/logout/">
-                <input type="hidden" name="csrfmiddlewaretoken"
-                       value="rrCJW9dmGvvXUN9ob2YxX1wxHTc5TlmVHfLOmXD4q51TSidkoJgK9P50ajn7BQ2D">
-                <button type="submit">Log out</button>
-            </form>
+            </button>
 
         </div>
 
@@ -92,7 +114,8 @@
 
                     <form enctype="multipart/form-data" method="post" id="application_form" novalidate><input
                             type="hidden" name="csrfmiddlewaretoken"
-                            value="rrCJW9dmGvvXUN9ob2YxX1wxHTc5TlmVHfLOmXD4q51TSidkoJgK9P50ajn7BQ2D">
+                    >
+                        {% csrf_token %}
                         <div>
 
 
@@ -173,9 +196,11 @@
                                                         id="id_ApplicationType">
                                                     <option value="" selected>---------</option>
 
-                                                    <option value="1">Call senter</option>
+                                                    \
+                                                    {% for application in applications %}
+                                                        <option value="{{ application.pk }}">{{ application.name }}</option>
 
-                                                    <option value="2">Qahramon Begboyev Begboyev</option>
+                                                    {% endfor %}
 
                                                 </select>
 

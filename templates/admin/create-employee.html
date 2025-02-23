@@ -21,6 +21,21 @@
             border-radius: 10px;
         }
 
+        body {
+            background-color: white !important;
+        }
+
+        .container {
+            background-color: white !important;
+            color: black;
+        }
+
+        button {
+            background-color: white !important;
+            color: #ffffff !important;
+            border: 1px solid black;
+        }
+
         .video-info h1 {
             font-size: 28px;
             font-weight: bold;
@@ -224,12 +239,18 @@
         </div>
         <div id="user-tools">
 
+            <a href="/application-type" class="button button1">Video</a>
+            <a href="/employee-list" class="button button1">Xodim</a>
+            <a href="/category-list" class="button button1">Lavozim</a>
+            <button class="theme-toggle">
+                <div class="visually-hidden theme-label-when-auto">Toggle theme (current theme: auto)</div>
+                <div class="visually-hidden theme-label-when-light">Toggle theme (current theme: light)</div>
+                <div class="visually-hidden theme-label-when-dark">Toggle theme (current theme: dark)</div>
+                <svg aria-hidden="true" class="theme-icon-when-auto">
+                    <use xlink:href="#icon-sun"/>
+                </svg>
 
-            <a href="/admin/apps/application/add/" class="button button1">Video</a>
-            <a href="/product_create" class="button button1">1 - Sklad</a>
-            <a href="/finish_product_create" class="button button1">2 - Sklad</a>
-            <a href="#" class="button button1">Maxsulotlar jadvali</a>
-
+            </button>
 
         </div>
 

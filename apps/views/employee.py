@@ -69,3 +69,14 @@ class EmployeeCreateFormView(FormView):
         else:
             form.add_error('password', 'Username yoki password noto\'g\'ri!')
             return self.form_invalid(form)
+
+
+@csrf_exempt
+def delete_category(request, category_id):
+    if request.method == 'DELETE':
+        category = get_object_or_404(ApplicationType, pk=category_id)
+        category.delete()
+        return JsonResponse({'success': True}, status=200)
+    return JsonResponse({'error': 'Invalid request method'}, status=400)
+
+

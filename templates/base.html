@@ -3,6 +3,94 @@
 <html lang="uz" dir="ltr">
 <head>
     <style>
+        #nav-sidebar .module th {
+            width: 100%;
+            overflow-wrap: anywhere;
+        }
+
+        #nav-sidebar .module th,
+        #nav-sidebar .module caption {
+            padding-left: 16px;
+        }
+
+        #nav-sidebar .module td {
+            white-space: nowrap;
+        }
+
+        [dir="rtl"] #nav-sidebar .module th,
+        [dir="rtl"] #nav-sidebar .module caption {
+            padding-left: 8px;
+            padding-right: 16px;
+        }
+
+        #nav-sidebar table {
+            width: 100%;
+        }
+
+
+        /* Asosiy uslublar */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+
+        .navbar h1 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            margin: 0;
+        }
+
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+
+        button[type="submit"] {
+            background-color: #3e7691 !important; /* Qoramtir ko‘k */
+            color: #ffffff !important; /* Oq matn */
+            
+        }
+
+        button[type="submit"]:hover {
+            background-color: #1f2d3d !important; /* Yanada quyuqroq ko‘k */
+        }
+
+
+        body {
+            background-color: white !important;
+        }
+
+
+        button {
+            background-color: #3e7691 !important;
+            color: #ffffff !important;
+            border: 1px solid black;
+        }
+
         .video-player video {
             border: none; /* Iframe chegarasini olib tashlaydi */
             width: 100%; /* Videoni moslashtiradi */
@@ -26,9 +114,9 @@
             align-items: center;
             justify-content: flex-start;
             padding: 15px;
-            background-color: #ffffff;
+            background-color: #0d7ebc;
             color: #333;
-            border: 2px solid #38ffae;
+            border: 2px solid #ffffff;
             border-radius: 10px;
             transition: all 0.3s ease-in-out;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -36,7 +124,7 @@
 
         /* Hover effect */
         .list-group-item:hover {
-            background-color: #38ffae;
+            background-color: #185a7e;
             color: white;
             transform: scale(1.05);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
@@ -49,7 +137,7 @@
         }
 
         .list-group-item.active {
-            background-color: #2c516d;
+            background-color: #216793;
             color: white;
             box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
         }
@@ -84,14 +172,14 @@
             font-size: 14px;
             cursor: pointer;
             border-radius: 5px;
-            background-color: #38ffae;
+            background-color: #324663;
             border: none;
             color: #fff;
             transition: background-color 0.3s;
         }
 
         .video-actions button:hover {
-            background-color: #2ec8a0;
+            background-color: #ffffff;
         }
 
         /* CHANGELISTS */
@@ -291,7 +379,8 @@
     <div id="header">
         <div id="branding">
 
-            <h1 id="site-name"><a href="/admin/">Qahramon</a></h1>
+            <br>
+            <br>
 
 
         </div>
@@ -300,9 +389,24 @@
         <div id="user-tools">
 
 
-            <a href="/employee-list" class="button button1">Xodimlar</a>
-            <a href="/application-type" class="button button1">Video</a>
+            <a href="/employee-list" class="button button1">Xodim</a>
+            <a href="/category-list" class="button button1">Lavozim</a>
+            <a href="/video-create" class="button button1">Video qo'shish</a>
+            <form id="logout-form" method="post" action="/">
+                <input type="hidden" name="csrfmiddlewaretoken"
+                >
+                {% csrf_token %}
+                <button type="submit">Log out</button>
+            </form>
+            <button class="theme-toggle">
+                <div class="visually-hidden theme-label-when-auto">Toggle theme (current theme: auto)</div>
+                <div class="visually-hidden theme-label-when-light">Toggle theme (current theme: light)</div>
+                <div class="visually-hidden theme-label-when-dark">Toggle theme (current theme: dark)</div>
+                <svg aria-hidden="true" class="theme-icon-when-auto">
+                    <use xlink:href="#icon-sun"/>
+                </svg>
 
+            </button>
         </div>
     </div>
 
@@ -327,10 +431,9 @@
 
                 <ul class="object-tools">
 
-
                 </ul>
-
-                <div class="row">
+                {% block video %}
+                    <div class="row">
                     <div class="col-md-2 h-70 text-center"
                          style="background-color: #ffffff; padding-right: 0; position: absolute;">
                         <div class="list-group text-light w-100 h-100">
@@ -346,7 +449,7 @@
                         </div>
                     </div>
 
-                    {% block video %}{% endblock %}
+                {% endblock %}
                 </div>
                 <div id="content" class>
                     <div style="display: flex; justify-content: center; gap: 10px;">
